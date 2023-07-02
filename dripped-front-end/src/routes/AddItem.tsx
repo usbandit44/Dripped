@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Select,
   MenuItem,
@@ -9,13 +9,20 @@ import {
   Button,
   Stack,
 } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import ClothingSchema from "../Schemas/ClothingSchema";
+import API from "../api/API";
 
 const AddItem = () => {
-  const { register, handleSubmit, getValues } = useForm<ClothingSchema>({
-    defaultValues: { name: "", category: "", subcategory: "" },
-  });
+  const { register, handleSubmit, reset, formState, setValue } =
+    useForm<ClothingSchema>({
+      defaultValues: {
+        name: "",
+        category: "",
+        subcategory: "",
+        image: new File([], ""),
+      },
+    });
 
   const category = ["Tops", "Bottoms", "Shoes", "Outerwear"];
   const topSubcategory = [
@@ -67,10 +74,26 @@ const AddItem = () => {
     setSelectedSubcategory(subcategoryOptions(event.target.value));
   };
 
-  const onSubmit = (data: ClothingSchema) => {
+  const onSubmit = async (data: ClothingSchema) => {
     console.log(data);
     console.log(imageSelected);
+    await API.Clothing.postClothing(data).then((res) => {
+      console.log(res.data);
+    });
   };
+
+  useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      reset({
+        name: "",
+        category: "",
+        subcategory: "",
+        image: new File([], ""),
+      });
+      setImageSelected(undefined);
+      setValue("category", "");
+    }
+  }, [formState, reset]);
 
   return (
     <>
