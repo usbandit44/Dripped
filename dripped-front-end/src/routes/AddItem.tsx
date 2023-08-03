@@ -75,7 +75,7 @@ const AddItem = () => {
   };
 
   const onSubmit = async (data: ClothingSchema) => {
-    await testDB();
+    //await testDB();
     console.log(data);
     console.log(imageSelected);
   };
