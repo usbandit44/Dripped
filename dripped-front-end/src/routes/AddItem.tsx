@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { set, useForm } from "react-hook-form";
 import ClothingSchema from "../Schemas/ClothingSchema";
-import API from "../api/API";
+import { testDB } from "../../../database";
 
 const AddItem = () => {
   const { register, handleSubmit, reset, formState, setValue } =
@@ -75,11 +75,9 @@ const AddItem = () => {
   };
 
   const onSubmit = async (data: ClothingSchema) => {
+    await testDB();
     console.log(data);
     console.log(imageSelected);
-    await API.Clothing.postClothing(data).then((res) => {
-      console.log(res.data);
-    });
   };
 
   useEffect(() => {
