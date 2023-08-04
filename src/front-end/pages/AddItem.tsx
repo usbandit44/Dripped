@@ -10,12 +10,18 @@ import {
   Stack,
 } from "@mui/material";
 import { set, useForm } from "react-hook-form";
-import ClothingSchema from "../Schemas/ClothingSchema";
-import API from "../api/API";
+import clothingSchema from "../schemas/clothingSchema";
+import { db } from "../../services/firebase.config";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  getDocs,
+} from "firebase/firestore";
 
 const AddItem = () => {
   const { register, handleSubmit, reset, formState, setValue } =
-    useForm<ClothingSchema>({
+    useForm<clothingSchema>({
       defaultValues: {
         name: "",
         category: "",
@@ -54,6 +60,8 @@ const AddItem = () => {
   const [selectedSubcategory, setSelectedSubcategory] = useState<string[]>([
     "",
   ]);
+  const [test, setTest] = useState<{ id: string }[]>();
+  const collectionRef = collection(db, "users");
 
   const subcategoryOptions = (category: string) => {
     switch (category) {
@@ -74,12 +82,13 @@ const AddItem = () => {
     setSelectedSubcategory(subcategoryOptions(event.target.value));
   };
 
-  const onSubmit = async (data: ClothingSchema) => {
+  const onSubmit = async (data: clothingSchema) => {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    querySnapshot.forEach((doc) => {
+      console.log(`${doc.id} => ${doc.data()}`);
+    });
     console.log(data);
     console.log(imageSelected);
-    await API.Clothing.postClothing(data).then((res) => {
-      console.log(res.data);
-    });
   };
 
   useEffect(() => {
