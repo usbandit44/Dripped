@@ -18,6 +18,8 @@ import {
   serverTimestamp,
   getDocs,
 } from "firebase/firestore";
+import { getClothingItem, postClothingItem } from "../../services/database";
+import { ClothingItem } from "../schemas/ClothingItem";
 
 const AddItem = () => {
   const { register, handleSubmit, reset, formState, setValue } =
@@ -25,7 +27,7 @@ const AddItem = () => {
       defaultValues: {
         name: "",
         category: "",
-        subcategory: "",
+        subCategory: "",
         image: new File([], ""),
       },
     });
@@ -83,12 +85,15 @@ const AddItem = () => {
   };
 
   const onSubmit = async (data: clothingSchema) => {
-    const querySnapshot = await getDocs(collection(db, "users"));
-    querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data()}`);
-    });
-    console.log(data);
-    console.log(imageSelected);
+    // const querySnapshot = await getDocs(collection(db, "users"));
+    // querySnapshot.forEach((doc) => {
+    //   console.log(`${doc.id} => ${doc.data()}`);
+    // });
+    //getClothingItem();
+    //console.log(data);
+    //console.log(imageSelected);
+    const item = ClothingItem.fromNewItemForm(data);
+    postClothingItem(item);
   };
 
   useEffect(() => {
@@ -96,7 +101,7 @@ const AddItem = () => {
       reset({
         name: "",
         category: "",
-        subcategory: "",
+        subCategory: "",
         image: new File([], ""),
       });
       setImageSelected(undefined);
@@ -132,12 +137,12 @@ const AddItem = () => {
             </Select>
           </FormControl>
           <FormControl fullWidth>
-            <InputLabel id="subcategory-label">Subcategory</InputLabel>
+            <InputLabel id="subCategory-label">Subcategory</InputLabel>
             <Select
-              labelId="subcategory-label"
-              id="subcategory"
-              label="subcategory"
-              {...register("subcategory", { required: true })}
+              labelId="subCategory-label"
+              id="subCategory"
+              label="subCategory"
+              {...register("subCategory", { required: true })}
             >
               {selectedSubcategory.map((subcategory) => (
                 <MenuItem value={subcategory}>{subcategory}</MenuItem>

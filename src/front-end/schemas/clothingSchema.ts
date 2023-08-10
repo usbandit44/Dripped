@@ -1,8 +1,11 @@
 type clothingSchema = {
-  name: string;
+  name?: string;
   category: string;
-  subcategory: string;
-  image: File;
+  subCategory: string;
+  image?: File;
+  color?: string;
+  createTime?: number;
+  updateTime?: number;
 };
 
 export default clothingSchema;
