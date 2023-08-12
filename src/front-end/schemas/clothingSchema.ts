@@ -2,7 +2,7 @@ type clothingSchema = {
   name?: string;
   category: string;
   subCategory: string;
-  image?: File;
+  image: File;
   color?: string;
   createTime?: number;
   updateTime?: number;

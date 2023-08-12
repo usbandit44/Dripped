@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { set, useForm } from "react-hook-form";
 import clothingSchema from "../schemas/clothingSchema";
-import { db } from "../../services/firebase.config";
+import { db, storageRef } from "../../services/firebase.config";
 import {
   collection,
   addDoc,
@@ -20,6 +20,7 @@ import {
 } from "firebase/firestore";
 import { getClothingItem, postClothingItem } from "../../services/database";
 import { ClothingItem } from "../schemas/ClothingItem";
+import { uploadBytes } from "firebase/storage";
 
 const AddItem = () => {
   const { register, handleSubmit, reset, formState, setValue } =
@@ -94,6 +95,10 @@ const AddItem = () => {
     //console.log(imageSelected);
     const item = ClothingItem.fromNewItemForm(data);
     postClothingItem(item);
+    if (imageSelected != null)
+      uploadBytes(storageRef, imageSelected).then(() => {
+        console.log("Uploaded a blob or file!");
+      });
   };
 
   useEffect(() => {
@@ -102,9 +107,8 @@ const AddItem = () => {
         name: "",
         category: "",
         subCategory: "",
-        image: new File([], ""),
       });
-      setImageSelected(undefined);
+      setImageSelected(new File([], ""));
       setValue("category", "");
     }
   }, [formState, reset]);
