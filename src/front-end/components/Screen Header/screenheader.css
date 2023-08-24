@@ -1,23 +1,22 @@
 .screen-header {
   display: flex;
   flex-direction: row;
-  height: 80px;
   border-color: #9b9a9a;
   border-bottom-style: solid;
   align-content: flex-start;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
 }
 
 .header-title {
   font-size: 50px;
   letter-spacing: 2px;
   width: fit-content;
-  margin-left: 40px;
 }
 
 .header-options {
   display: flex;
   flex-direction: row;
   align-self: center;
-  margin-left: 45%;
   gap: 5px;
 }
