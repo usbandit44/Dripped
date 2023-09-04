@@ -110,73 +110,74 @@ const AddItem = () => {
   }, [formState, reset]);
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack spacing={2} alignItems={"center"}>
-          <TextField
-            id="name"
-            label="Name"
-            variant="outlined"
-            fullWidth
-            {...register("name", { required: true })}
-          />
-          <FormControl fullWidth>
-            <InputLabel id="category-label">Category</InputLabel>
-            <Select
-              labelId="category-label"
-              id="category"
-              label="category"
-              {...register("category", {
-                required: true,
-                onChange: handleChange,
-              })}
-            >
-              {category.map((category) => (
-                <MenuItem value={category}>{category}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl fullWidth>
-            <InputLabel id="subCategory-label">Subcategory</InputLabel>
-            <Select
-              labelId="subCategory-label"
-              id="subCategory"
-              label="subCategory"
-              {...register("subCategory", { required: true })}
-            >
-              {selectedSubcategory.map((subcategory) => (
-                <MenuItem value={subcategory}>{subcategory}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          {imageSelected && (
-            <div>
-              <img
-                alt="not found"
-                width={"250px"}
-                src={URL.createObjectURL(imageSelected)}
-              />
-            </div>
-          )}
-          <Button variant="contained" component="label">
-            Upload Image
-            <input
-              type="file"
-              hidden
-              {...register("image", {
-                required: true,
-                onChange(event) {
-                  setImageSelected(event.target.files[0]);
-                },
-              })}
-            />
-          </Button>
-          <Button type="submit" variant="contained">
-            Submit
-          </Button>
-        </Stack>
-      </form>
-    </>
+    // <>
+    //   <form onSubmit={handleSubmit(onSubmit)}>
+    //     <Stack spacing={2} alignItems={"center"}>
+    //       <TextField
+    //         id="name"
+    //         label="Name"
+    //         variant="outlined"
+    //         fullWidth
+    //         {...register("name", { required: true })}
+    //       />
+    //       <FormControl fullWidth>
+    //         <InputLabel id="category-label">Category</InputLabel>
+    //         <Select
+    //           labelId="category-label"
+    //           id="category"
+    //           label="category"
+    //           {...register("category", {
+    //             required: true,
+    //             onChange: handleChange,
+    //           })}
+    //         >
+    //           {category.map((category) => (
+    //             <MenuItem value={category}>{category}</MenuItem>
+    //           ))}
+    //         </Select>
+    //       </FormControl>
+    //       <FormControl fullWidth>
+    //         <InputLabel id="subCategory-label">Subcategory</InputLabel>
+    //         <Select
+    //           labelId="subCategory-label"
+    //           id="subCategory"
+    //           label="subCategory"
+    //           {...register("subCategory", { required: true })}
+    //         >
+    //           {selectedSubcategory.map((subcategory) => (
+    //             <MenuItem value={subcategory}>{subcategory}</MenuItem>
+    //           ))}
+    //         </Select>
+    //       </FormControl>
+    //       {imageSelected && (
+    //         <div>
+    //           <img
+    //             alt="not found"
+    //             width={"250px"}
+    //             src={URL.createObjectURL(imageSelected)}
+    //           />
+    //         </div>
+    //       )}
+    //       <Button variant="contained" component="label">
+    //         Upload Image
+    //         <input
+    //           type="file"
+    //           hidden
+    //           {...register("image", {
+    //             required: true,
+    //             onChange(event) {
+    //               setImageSelected(event.target.files[0]);
+    //             },
+    //           })}
+    //         />
+    //       </Button>
+    //       <Button type="submit" variant="contained">
+    //         Submit
+    //       </Button>
+    //     </Stack>
+    //   </form>
+    // </>
+    <div></div>
   );
 };
 

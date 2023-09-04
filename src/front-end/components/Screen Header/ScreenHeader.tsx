@@ -58,7 +58,15 @@ const ScreenHeader = () => {
     <div className="screen-header">
       <div className="header-title">Closet</div>
       <div className="header-options">
-        <button className="main-button">
+        <button
+          className="main-button"
+          onClick={() => {
+            var modal = document.getElementById("addItemModal");
+            if (modal != null) {
+              modal.style.display = "flex";
+            }
+          }}
+        >
           <AddSharpIcon></AddSharpIcon>
           Add Item
         </button>
