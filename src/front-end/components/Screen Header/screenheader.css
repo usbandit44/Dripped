@@ -1,0 +1,22 @@
+.screen-header {
+  display: flex;
+  flex-direction: row;
+  border-color: #9b9a9a;
+  border-bottom-style: solid;
+  align-content: flex-start;
+  justify-content: space-between;
+  padding: 0.5rem 3rem;
+}
+
+.header-title {
+  font-size: 50px;
+  letter-spacing: 3px;
+  width: fit-content;
+}
+
+.header-options {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  gap: 5px;
+}
